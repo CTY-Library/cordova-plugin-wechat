@@ -10,9 +10,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
+//import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class Util {
 
@@ -65,10 +67,10 @@ public class Util {
 
             Log.d(Wechat.TAG, String.format("Start downloading file at %s.", url));
 
-            HttpURLConnection connection = (HttpURLConnection) fileURL.openConnection();
+          HttpsURLConnection connection = (HttpsURLConnection) fileURL.openConnection();
             connection.connect();
 
-            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK) {
                 Log.e(Wechat.TAG, String.format("Failed to download file from %s, response code: %d.", url, connection.getResponseCode()));
                 return null;
             }

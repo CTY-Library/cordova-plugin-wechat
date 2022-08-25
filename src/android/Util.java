@@ -1,8 +1,11 @@
 package xu.li.cordova.wechat;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+
+import org.apache.cordova.camera.FileProvider;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -60,6 +63,31 @@ public class Util {
         return cacheDir;
     }
 
+  /**
+   * 返回uri
+   */
+  private static Uri getUriForFile(Context context, File file) {
+    //应用包名.provider
+    String authority = context.getPackageName().concat(".provider");
+    Uri fileUri = FileProvider.getUriForFile(context, authority, file);
+    return fileUri;
+  }
+
+  /**
+   * 返回文件夹
+   */
+  private static File getFileUrl(Context context) {
+    File root = context.getFilesDir();
+    File dir = new File(root, "Download/");
+    if (!dir.exists()) {
+      //创建失败
+      if (!dir.mkdir()) {
+        // Log.e(TAG, "createBitmapPdf: 创建失败");
+      }
+    }
+    return dir;
+  }
+
     public static File downloadAndCacheFile(Context context, String url) {
         URL fileURL = null;
         try {
@@ -77,7 +105,7 @@ public class Util {
 
             InputStream inputStream = connection.getInputStream();
 
-            File cacheDir = getCacheFolder(context);
+            File cacheDir = getFileUrl(context);// getCacheFolder(context);
             File cacheFile = new File(cacheDir, url.substring(url.lastIndexOf("/") + 1));
             FileOutputStream outputStream = new FileOutputStream(cacheFile);
 

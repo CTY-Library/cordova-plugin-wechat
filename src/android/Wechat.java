@@ -112,6 +112,8 @@ public class Wechat extends CordovaPlugin {
     protected static String appId;
     protected static CordovaPreferences wx_preferences;
 
+   protected static Boolean initWXAPIFinished = false;
+
     @Override
     protected void pluginInitialize() {
 
@@ -123,7 +125,7 @@ public class Wechat extends CordovaPlugin {
         saveAppId(cordova.getActivity(), id);
 
         // init api
-        initWXAPI();
+        //initWXAPI();
 
         Log.d(TAG, "plugin initialized.");
     }
@@ -136,6 +138,7 @@ public class Wechat extends CordovaPlugin {
         if (api != null) {
             api.registerApp(getAppId(preferences));
         }
+        initWXAPIFinished = true;
     }
 
     /**
@@ -158,6 +161,11 @@ public class Wechat extends CordovaPlugin {
     @Override
     public boolean execute(String action, CordovaArgs args, CallbackContext callbackContext) throws JSONException {
         Log.d(TAG, String.format("%s is called. Callback ID: %s.", action, callbackContext.getCallbackId()));
+
+        if(initWXAPIFinished == false){
+          initWXAPI();
+        }
+
 
         if (action.equals("share")) {
             return share(args, callbackContext);
@@ -470,7 +478,7 @@ public class Wechat extends CordovaPlugin {
 
                 case TYPE_WECHAT_SHARING_IMAGE:
                     Bitmap image = getBitmap(message.getJSONObject(KEY_ARG_MESSAGE_MEDIA), KEY_ARG_MESSAGE_MEDIA_IMAGE, 0);
-                    // give some tips to user           
+                    // give some tips to user
                     if(image != null) {
                         mediaObject = new WXImageObject(image);
                         image.recycle();

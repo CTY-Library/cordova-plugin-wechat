@@ -179,6 +179,8 @@ public class Wechat extends CordovaPlugin {
             return chooseInvoiceFromWX(args, callbackContext);
         }else if(action.equals("openMiniProgram")){
             return openMiniProgram(args,callbackContext);
+        }else if(action.equals("openApp")){
+            return openApp(callbackContext);
         }
 
         return false;
@@ -763,6 +765,13 @@ public class Wechat extends CordovaPlugin {
             callbackContext.error(ERROR_INVALID_PARAMETERS);
             Log.e(TAG,e.getMessage());
         }
+        return true;
+    }
+    
+     protected boolean openApp(CallbackContext callbackContext) {
+        callbackContext.success(Wechat.data);
+        Wechat.data = "";
+
         return true;
     }
 

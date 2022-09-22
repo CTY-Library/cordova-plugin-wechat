@@ -111,6 +111,7 @@ public class Wechat extends CordovaPlugin {
     protected static IWXAPI wxAPI;
     protected static String appId;
     protected static CordovaPreferences wx_preferences;
+    public static String data = "";
 
    protected static Boolean initWXAPIFinished = false;
 

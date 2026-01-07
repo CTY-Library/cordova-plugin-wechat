@@ -10,8 +10,8 @@
     <description>A cordova plugin, a JS version of Wechat SDK</description>
     <license>MIT</license>
     <keywords>cordova,wechat,weixin,share</keywords>
-    <repo>https://github.com/xu-li/cordova-plugin-wechat.git</repo>
-    <issue>https://github.com/xu-li/cordova-plugin-wechat/issues</issue>
+    <repo>https://github.com/CTY-Library/cordova-plugin-wechat.git</repo>
+    <issue>https://github.com/CTY-Library/cordova-plugin-wechat/issues</issue>
 
     <!-- add this to your config.xml -->
     <!-- <preference name="WECHATAPPID" value="YOUR_WECHAT_APP_ID_HERE" /> -->
@@ -70,10 +70,10 @@
         <source-file src="src/ios/AppDelegate+Wechat.m" />
 
         <!-- Wechat Official -->
-        <header-file src="src/ios/libs/OpenSDK1.8.6.2/WXApi.h" />
-        <header-file src="src/ios/libs/OpenSDK1.8.6.2/WXApiObject.h" />
-        <header-file src="src/ios/libs/OpenSDK1.8.6.2/WechatAuthSDK.h" />
-        <source-file src="src/ios/libs/OpenSDK1.8.6.2/libWeChatSDK.a" framework="true" />
+        <header-file src="src/ios/libs/OpenSDK2.0.5/WXApi.h" />
+        <header-file src="src/ios/libs/OpenSDK2.0.5/WXApiObject.h" />
+        <header-file src="src/ios/libs/OpenSDK2.0.5/WechatAuthSDK.h" />
+        <source-file src="src/ios/libs/OpenSDK2.0.5/libWeChatSDK.a" framework="true" />
 
         <!-- Other required frameworks -->
         <framework src="libz.tbd" />

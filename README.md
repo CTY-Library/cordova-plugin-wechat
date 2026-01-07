@@ -5,6 +5,8 @@
 
 # 重要说明
 
+update ios SDK 2.0.5
+
 Due to the security upgrade of iOS 13 system version, the official WeChat SDK has been adapted from 1.8.6 with supports * Universal Links * mode jumps, and the validity check when sharing.
 
 
@@ -41,6 +43,26 @@ cordova build android
 ```
 
 # Usage 
+在IOS的AppDelegate.m文件加上下面的代码,详情查看微信开放平台: 
+
+https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/iOS.html
+
+
+```Javascript
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return  [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler{
+    return [WXApi handleOpenUniversalLink:userActivity delegate:self];
+}
+```
 
 ## Check if wechat is installed
 
@@ -139,7 +161,7 @@ Wechat.share({
 
 ## Send payment request
 ```Javascript
-// See https://github.com/xu-li/cordova-plugin-wechat-example/blob/master/server/payment_demo.php for php demo
+// See https://github.com/CTY-Library/cordova-plugin-wechat-example/blob/master/server/payment_demo.php for php demo
 var params = {
     partnerid: '10000100', // merchant id
     prepayid: 'wx201411101639507cbf6ffd8b0779950874', // prepay id
@@ -187,21 +209,8 @@ Wechat.openMiniProgram(params,function(data){
     alert('error');
 })
 ```
+ 
 
-more usage  please see [https://jasonz1987.github.io/cordova-wechat-docs/docs/usages](https://jasonz1987.github.io/cordova-wechat-docs/docs/usages)
-
-# Join us
-
-QQ群：190808518 
-[![cordova-wechat官方交流群](https://pub.idqqimg.com/wpa/images/group.png)](http://shang.qq.com/wpa/qunwpa?idkey=8279476de172cacb72a51a5630744316c0069620ad8b33be3abee243af2cc001)
-
-# Donate
-
-we need your support to improve open source software ,if we induce your develop time ,welcome to donate us.
-
-[![paypal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/jasonz1987/6.66)
-
-![donate.png](donate.png)
 
 # LICENSE
 
